@@ -34,7 +34,7 @@ const subscriptionSchema = new mongoose.Schema({
   },
   status:{
     type:String,
-    enum: ["active", "inactive", "canceled"],
+    enum: ["active", "expired", "canceled"],
     default: "active"
   },
   startDate:{
@@ -73,7 +73,7 @@ subscriptionSchema.pre("save", function(next){
       monthly:30,
       yearly:365
     }
-    this.renewalDate = this.startDate;
+    this.renewalDate = new Date(this.startDate); 
     this.renewalDate.setDate(this.renewalDate.getDate() + frequencyMap[this.frequency]);
     
   }
