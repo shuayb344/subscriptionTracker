@@ -5,11 +5,14 @@ import authRouter from "./routes/authRoutes.js";
 import subscriptionRouter from "./routes/subscriptionRoutes.js";
 import connectDB from "./database/mongodb.js";
 import errorMiddleware from "./middleware/errorMiddleware.js";
+import { arcjetMiddleware } from "./middleware/arcjetMiddleware.js";
+
 
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(arcjetMiddleware);
 app.use("/api/users", usersRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/subscriptions", subscriptionRouter);
