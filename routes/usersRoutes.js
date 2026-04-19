@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getAllUsers , getUser} from "../controllers/userController";
+import { getAllUsers , getUser} from "../controllers/userController.js";
 import { authorize } from "../middleware/authMiddleware.js";
 const usersRouter = Router();
 usersRouter.get("/", getAllUsers);

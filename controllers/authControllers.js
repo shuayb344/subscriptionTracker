@@ -35,7 +35,7 @@ export const signUp = async (req, res, next) => {
 export const signIn = async (req, res, next) => {
   try{
     const { email, password } = req.body
-    const user = await User.find({ email })
+    const user = await User.findOne({ email })
     if(!user){
       const error = new Error("user not found")
       error.status = 401
@@ -44,7 +44,7 @@ export const signIn = async (req, res, next) => {
    
     const isMatch = await bcrypt.compare(password, user.password)
     if(!isMatch){
-      const error = new Error("Invalid passward")
+      const error = new Error("Invalid password")
       error.status = 401
       throw error
     }
